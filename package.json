@@ -4,13 +4,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest"
+    "lucide-react": "latest",
+    "@prisma/client": "latest"
   },
   "devDependencies": {
     "typescript": "latest",
@@ -19,6 +21,7 @@
     "@types/react-dom": "latest",
     "tailwindcss": "latest",
     "postcss": "latest",
-    "autoprefixer": "latest"
+    "autoprefixer": "latest",
+    "prisma": "latest"
   }
 }
