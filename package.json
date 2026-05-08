@@ -12,7 +12,7 @@
     "react": "latest",
     "react-dom": "latest",
     "lucide-react": "latest",
-    "@prisma/client": "latest"
+    "@prisma/client": "^6.0.0"
   },
   "devDependencies": {
     "typescript": "latest",
@@ -22,6 +22,6 @@
     "tailwindcss": "latest",
     "postcss": "latest",
     "autoprefixer": "latest",
-    "prisma": "latest"
+    "prisma": "^6.0.0"
   }
 }
