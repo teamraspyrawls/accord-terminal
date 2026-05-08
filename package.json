@@ -1,7 +1,7 @@
 {
   "name": "accord-terminal",
   "private": true,
-  "scripts": {
+ "scripts": {
     "dev": "next dev",
     "build": "prisma db push && next build",
     "start": "next start",
