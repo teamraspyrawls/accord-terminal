@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// This is the blueprint for the Vault's memory
+model ProtocolLog {
+  id        String   @id @default(uuid())
+  action    String   // This will say "ACCESS GRANTED"
+  timestamp DateTime @default(now())
+}
