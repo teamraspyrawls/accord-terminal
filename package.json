@@ -1,5 +1,5 @@
 {
-  "name": "accord-terminal",
+  "name": "accord-vault-system",
   "private": true,
   "scripts": {
     "dev": "next dev",
