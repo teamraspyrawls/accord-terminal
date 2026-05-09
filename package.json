@@ -24,4 +24,3 @@
     "autoprefixer": "latest",
     "prisma": "^6.0.0"
   }
-}
