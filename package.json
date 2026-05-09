@@ -1,0 +1,26 @@
+{
+  "name": "accord-vault",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma db push && next build",
+    "start": "next start",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "lucide-react": "latest",
+    "@prisma/client": "^6.0.0"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "tailwindcss": "latest",
+    "postcss": "latest",
+    "autoprefixer": "latest",
+    "prisma": "^6.0.0"
+  }
