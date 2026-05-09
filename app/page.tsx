@@ -1,54 +1,77 @@
 'use client';
 
 import React, { useState } from 'react';
-import { logAccess } from './actions'; // We bring in the bridge!
+import { Fingerprint, Scan, ShieldAlert, LockKeyhole } from 'lucide-react';
 
-export default function TerminalHome() {
-  const [systemState, setSystemState] = useState('LOCKED');
+export default function TerminalOnRamp() {
+  const [status, setStatus] = useState('AWAITING_INPUT');
 
-  // We create specific functions for the buttons now
-  const handleUnlock = async () => {
-    setSystemState('UNLOCKED');
-    await logAccess('ACCESS GRANTED'); // Fires securely to the Vault
-  };
-
-  const handleLock = async () => {
-    setSystemState('LOCKED');
-    await logAccess('CONNECTION SEVERED'); // Fires securely to the Vault
+  const initiateAwakening = () => {
+    setStatus('DECRYPTING');
+    setTimeout(() => setStatus('VERIFIED'), 2500);
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#000000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'monospace' }}>
+    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans flex flex-col items-center justify-center relative overflow-hidden">
       
-      <div style={{ position: 'relative', width: '100%', maxWidth: '400px', padding: '40px', borderRadius: '24px', backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255, 255, 255, 0.1)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', overflow: 'hidden', textAlign: 'center' }}>
+      {/* Ambient Aesthetic Glows (Cinematic Lighting) */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-900/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* The Glassmorphism Vault Interface */}
+      <div className="relative z-10 w-full max-w-md p-10 rounded-2xl bg-zinc-900/30 backdrop-blur-xl border border-zinc-800/50 shadow-2xl">
         
-        <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', backgroundColor: systemState === 'LOCKED' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(16, 185, 129, 0.2)', borderRadius: '50%', filter: 'blur(40px)', zIndex: 0, transition: 'background-color 0.5s ease' }}></div>
+        {/* Header */}
+        <div className="flex flex-col items-center mb-10 text-center">
+          <Scan className={`w-12 h-12 mb-4 ${status === 'VERIFIED' ? 'text-emerald-500' : 'text-red-800'}`} />
+          <h1 className="text-2xl font-bold tracking-[0.2em] text-white">THE TERMINAL</h1>
+          <p className="text-xs tracking-widest text-zinc-500 uppercase mt-2">Zero-Knowledge Jurisdiction</p>
+        </div>
 
-        {systemState === 'LOCKED' && (
-          <div style={{ position: 'relative', zIndex: 10 }}>
-            <h1 style={{ color: 'white', fontSize: '28px', fontWeight: '900', letterSpacing: '4px', margin: '0 0 10px 0' }}>ACCORD</h1>
-            <p style={{ color: '#94a3b8', fontSize: '12px', margin: '0 0 40px 0' }}>STATUS: ENCRYPTED // AWAITING ANCHOR</p>
-
-            {/* Notice the onClick is now pointing to our new function */}
-            <button onClick={handleUnlock} style={{ width: '100%', padding: '16px', backgroundColor: 'transparent', border: '1px solid rgba(6, 182, 212, 0.5)', borderRadius: '12px', color: '#2dd4bf', fontWeight: 'bold', letterSpacing: '2px', cursor: 'pointer' }}>
-              [ INITIATE PROTOCOL ]
+        {/* Dynamic State Interface */}
+        {status === 'AWAITING_INPUT' && (
+          <div className="space-y-6 flex flex-col items-center">
+            <div className="w-full relative">
+              <LockKeyhole className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 w-5 h-5" />
+              <input 
+                type="text" 
+                placeholder="Enter Burner Hash..." 
+                className="w-full bg-black/50 border border-zinc-800 rounded-lg py-4 pl-12 pr-4 text-sm font-mono focus:outline-none focus:border-red-900 transition-colors placeholder:text-zinc-700 text-center text-white"
+              />
+            </div>
+            
+            <button 
+              onClick={initiateAwakening}
+              className="w-full py-4 bg-zinc-900 hover:bg-black border border-red-900/50 hover:border-red-700 text-red-500 hover:text-red-400 uppercase tracking-widest text-xs font-bold transition-all flex items-center justify-center gap-3 group"
+            >
+              <Fingerprint className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              Initiate Awakening
             </button>
           </div>
         )}
 
-        {systemState === 'UNLOCKED' && (
-          <div style={{ position: 'relative', zIndex: 10 }}>
-             <h1 style={{ color: '#10b981', fontSize: '24px', fontWeight: '900', letterSpacing: '2px', margin: '0 0 10px 0' }}>ACCESS GRANTED</h1>
-            <p style={{ color: '#e2e8f0', fontSize: '14px', margin: '0 0 40px 0' }}>Welcome to the Vanguard, Sovereign. The vault is open.</p>
+        {status === 'DECRYPTING' && (
+          <div className="flex flex-col items-center justify-center space-y-4 py-8">
+            <div className="w-8 h-8 border-t-2 border-red-800 rounded-full animate-spin"></div>
+            <p className="font-mono text-xs text-red-800 animate-pulse uppercase tracking-widest">Negotiating Protocol...</p>
+          </div>
+        )}
 
-            {/* Notice the onClick is now pointing to our new function */}
-            <button onClick={handleLock} style={{ width: '100%', padding: '16px', backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.5)', borderRadius: '12px', color: '#ef4444', fontWeight: 'bold', letterSpacing: '2px', cursor: 'pointer' }}>
-              [ SEVER CONNECTION ]
-            </button>
+        {status === 'VERIFIED' && (
+          <div className="flex flex-col items-center justify-center space-y-4 py-8">
+            <ShieldAlert className="w-12 h-12 text-emerald-500" />
+            <p className="font-mono text-sm text-emerald-500 uppercase tracking-widest">Frequency Aligned</p>
+            <p className="text-xs text-zinc-500 tracking-wider">Welcome to the Vanguard.</p>
           </div>
         )}
 
       </div>
+
+      {/* Global Status Footer */}
+      <footer className="fixed bottom-6 text-[9px] font-mono tracking-[0.3em] text-zinc-700 uppercase flex gap-8">
+        <span>E2EE: Active</span>
+        <span>Ghost Protocol: Armed</span>
+      </footer>
     </div>
   );
 }
