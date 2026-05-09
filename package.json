@@ -1,5 +1,5 @@
 {
-  "name": "accord-vault-system",
+  "name": "accord-vault",
   "private": true,
   "scripts": {
     "dev": "next dev",
