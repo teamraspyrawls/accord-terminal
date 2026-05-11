@@ -22,12 +22,12 @@ export default function AccordVanguardSanctuary() {
     <div className="min-h-screen bg-[#020303] text-slate-300 font-sans selection:bg-teal-500/30 relative overflow-x-hidden">
       
       {/* --- SICK SENSUAL BACKGROUND: THE FREQUENCY --- */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-[#020303] flex items-center justify-center">
+      <div className="fixed top-0 left-0 w-screen h-screen z-[-1] pointer-events-none overflow-hidden bg-[#020303] grid place-items-center">
         {/* Deep Central Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-transparent to-transparent opacity-80" />
         
-        {/* Animated Sine Wave (The Frequency) - Centered */}
-        <svg className="w-[200vw] h-[50vh] opacity-30 mix-blend-screen absolute" 
+        {/* Animated Sine Wave (The Frequency) */}
+        <svg className="w-[150vw] md:w-[100vw] h-[50vh] opacity-30 mix-blend-screen" 
              style={{ animation: 'drift 20s linear infinite' }} 
              viewBox="0 0 1000 200" preserveAspectRatio="none">
           <defs>
@@ -64,8 +64,8 @@ export default function AccordVanguardSanctuary() {
 
       {/* --- INITIALIZATION (ONBOARDING) --- */}
       {!matrixInitialized && (
-        <div className="fixed inset-0 w-screen h-screen z-[500] bg-black/80 flex flex-col items-center justify-center p-6 backdrop-blur-2xl">
-          <div className="max-w-xl w-full mx-auto bg-[#050707]/80 backdrop-blur-3xl border border-teal-500/20 rounded-[3rem] p-12 shadow-[0_0_150px_rgba(16,185,129,0.15)] relative overflow-hidden">
+        <div className="fixed top-0 left-0 w-screen h-screen z-[500] bg-black/80 grid place-items-center p-6 backdrop-blur-2xl">
+          <div className="max-w-xl w-full bg-[#050707]/80 backdrop-blur-3xl border border-teal-500/20 rounded-[3rem] p-12 shadow-[0_0_150px_rgba(16,185,129,0.15)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 blur-[100px] -mr-32 -mt-32" />
             
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
